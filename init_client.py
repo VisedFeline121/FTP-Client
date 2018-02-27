@@ -54,61 +54,61 @@ close           lcd             open            rmdir"""
         self.log_client_socket.send("help" + ENDING)
 
     def LIST(self):
-         self.log_client_socket.send("NLST")
+         self.log_client_socket.send("NLST" + ENDING)
 
     def MODE(self):
-        pass
+        self.log_client_socket.send("ALLO" + ENDING)
 
     def NLST(self):
         self.LIST()
 
     def NOOP(self):
-        pass
+        self.log_client_socket.send("NOOP" + ENDING)
 
     def OPTS(self):
-        pass
+        self.log_client_socket.send("OPTS" + ENDING)
 
     def PASSW(self):
-        pass
+        self.log_client_socket.send("PASSW" + ENDING)
 
     def PASV(self):
-        pass
+        self.log_client_socket.send("PASV" + ENDING)
 
     def PORT(self):
-        pass
+        self.log_client_socket.send("PORT" + ENDING)
 
     def QUIT(self):
-        pass
+        self.log_client_socket.send("QUIT" + ENDING)
 
     def REIN(self):
-        pass
+        self.log_client_socket.send("REIN" + ENDING)
 
     def REST(self):
-        pass
+        self.log_client_socket.send("REST" + ENDING)
 
     def REST_S(self):
-        pass
+        self.log_client_socket.send("REST_S" + ENDING)
 
     def RNFR(self):
-        pass
+        self.log_client_socket.send("RNFR" + ENDING)
 
     def RNTO(self):
-        pass
+        self.log_client_socket.send("RNTO" + ENDING)
 
     def SITE(self):
-        pass
+        self.log_client_socket.send("SITE" + ENDING)
 
     def STAT(self):
-        pass
+        self.log_client_socket.send("STAT" + ENDING)
 
     def STOR(self):
-        pass
+        self.log_client_socket.send("STOR" + ENDING)
 
     def STRU(self):
-        pass
+        self.log_client_socket.send("STRU" + ENDING)
 
     def TYPE(self):
-        pass
+        self.log_client_socket.send("TYPE" + ENDING)
 
     def USER(self):
-        pass
+        self.log_client_socket.send("USER" + ENDING)
