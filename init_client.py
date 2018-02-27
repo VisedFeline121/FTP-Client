@@ -17,7 +17,6 @@ class Client():
     def get_response_on_command(self):
         num = self.log_client_socket.recv(3)
 
-
     def AUTH(self, mechanism):
         self.log_client_socket.send("AUTH " + mechanism + ENDING)
 
@@ -25,19 +24,19 @@ class Client():
         self.log_client_socket.send("ACCT" + ENDING)
 
     def ALLO(self):
-        pass
+        self.log_client_socket.send("ALLO" + ENDING)
 
     def APPE(self):
-        pass
+        self.log_client_socket.send("APPE" + ENDING)
 
     def CWD(self):
-        pass
+        self.log_client_socket.send("CWD" + ENDING)
 
     def DELE(self):
-        pass
+        self.log_client_socket.send("DELE" + ENDING)
 
     def FEAT(self):
-        pass
+        self.log_client_socket.send("FEAT" + ENDING)
 
     def HELP(self):
         print """!               delete          literal         prompt          send
@@ -57,7 +56,7 @@ close           lcd             open            rmdir"""
          self.log_client_socket.send("NLST" + ENDING)
 
     def MODE(self):
-        self.log_client_socket.send("ALLO" + ENDING)
+        self.log_client_socket.send("MODE" + ENDING)
 
     def NLST(self):
         self.LIST()
@@ -112,3 +111,12 @@ close           lcd             open            rmdir"""
 
     def USER(self):
         self.log_client_socket.send("USER" + ENDING)
+a = Client('demo.wftpserver.com')
+a.log_client_socket.send("OPTS UTF8 ON\r\n")
+a.log_client_socket.recv(1024)
+a.log_client_socket.recv(1024)
+a.log_client_socket.send("USER demo-user\r\n")
+a.log_client_socket.recv(1024)
+a.log_client_socket.send("PASS demo-user\r\n")
+a.log_client_socket.recv(1024)
+a.TYPE()
