@@ -11,18 +11,18 @@ class Client():
     def __init__(self, ip):
         self.FTP_IP = ip
         self.FTP_PORT = 21
-        self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.client_socket.connect((self.FTP_IP, self.FTP_PORT))
+        self.log_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.log_client_socket.connect((self.FTP_IP, self.FTP_PORT))
 
     def get_response_on_command(self):
-        num = self.client_socket.recv(3)
+        num = self.log_client_socket.recv(3)
 
 
     def AUTH(self, mechanism):
-        self.client_socket.send("AUTH " + mechanism + ENDING)
+        self.log_client_socket.send("AUTH " + mechanism + ENDING)
 
     def ACCT(self):
-        pass
+        self.log_client_socket.send("ACCT" + ENDING)
 
     def ALLO(self):
         pass
@@ -40,16 +40,27 @@ class Client():
         pass
 
     def HELP(self):
-        pass
+        print """!               delete          literal         prompt          send
+?               debug           ls              put             status
+append          dir             mdelete         pwd             trace
+ascii           disconnect      mdir            quit            type
+bell            get             mget            quote           user
+binary          glob            mkdir           recv            verbose
+bye             hash            mls             remotehelp
+cd              help            mput            rename
+close           lcd             open            rmdir"""
+
+    def LIT_HELP(self):
+        self.log_client_socket.send("help" + ENDING)
 
     def LIST(self):
-        pass
+         self.log_client_socket.send("NLST")
 
     def MODE(self):
         pass
 
     def NLST(self):
-        pass
+        self.LIST()
 
     def NOOP(self):
         pass
