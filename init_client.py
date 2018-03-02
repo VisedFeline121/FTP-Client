@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 import socket
-import urllib2
-
 ENDING = "\r\n"
 BITSIZE = 8
 resp = {}
 regex = r"[1-5]\d{2} .+((\n.+){1,2})?"
 start_line = 'ftp> '
-
+COMMANDS = """!               delete          literal         prompt          send
+?               debug           ls              put             status
+append          dir             mdelete         pwd             trace
+ascii           disconnect      mdir            quit            type
+bell            get             mget            quote           user
+binary          glob            mkdir           recv            verbose
+bye             hash            mls             remotehelp
+cd              help            mput            rename
+close           lcd             open            rmdir"""
 
 class Client():
     def __init__(self):
@@ -63,17 +69,6 @@ class Client():
     def FEAT(self):
         self.log_client_socket.send("FEAT" + ENDING)
         print self.log_client_socket.recv(1024),
-
-    def HELP(self):
-        print """!               delete          literal         prompt          send
-?               debug           ls              put             status
-append          dir             mdelete         pwd             trace
-ascii           disconnect      mdir            quit            type
-bell            get             mget            quote           user
-binary          glob            mkdir           recv            verbose
-bye             hash            mls             remotehelp
-cd              help            mput            rename
-close           lcd             open            rmdir"""
 
     def LIT_HELP(self):
         self.log_client_socket.send("help" + ENDING)
@@ -162,13 +157,18 @@ close           lcd             open            rmdir"""
         print self.log_client_socket.recv(1024),
 
 
-def handle(client, com):
-    if com == 'delete':
-        client.AUTH()
+def handle(client, com, status):
+    if com[0] == 'help':
+        print COMMANDS
+
+
+def lit_handle(client, com):
+    if com[0] == 'help':
+        client.LIT_HELP()
 
 
 def main():
-    a = Client()
+    a = None
     commands = ['!', 'delete', 'literal', 'prompt', 'send',
                 '?', 'debug', 'ls', 'put', 'status',
                 'append', 'dir', 'mdelete', 'pwd', 'trace',
@@ -183,6 +183,7 @@ def main():
     while ser[0] not in ['quit', 'bye']:
         if ser[0] == "open":
             if not connected:
+                a = Client()
                 if len(ser) == 1:
                     address = raw_input("To ")
                 else:
@@ -190,15 +191,17 @@ def main():
                 connected = a.init_connection(address)
             else:
                 print "Already connected to a server, please disconnect first"
-        elif ser[0] in commands:
-            if not connected:
-                print "Please connect to a server first."
-            else:
-                handle(a, ser[0])
+        if ser[0] == "close" and connected:
+            a.QUIT()
+            connected = False
+        if ser[0] in commands:
+            handle(a, ser, connected)
         else:
             print "invalid command"
         ser = raw_input(start_line).split(' ')
-    a.QUIT()
+    if connected:
+        a.QUIT()
+
 
 if __name__ == '__main__':
     main()
