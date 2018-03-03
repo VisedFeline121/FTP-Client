@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import socket
+import platform
+import handle
+
 ENDING = "\r\n"
 BITSIZE = 8
 resp = {}
@@ -17,6 +20,8 @@ close           lcd             open            rmdir"""
 
 class Client():
     def __init__(self):
+        self.pstatus = False
+        self.mode = 'ascii'
         self.FTP_PORT = 21
         self.log_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -30,6 +35,7 @@ class Client():
             print self.log_client_socket.recv(1024),
             self.log_client_socket.send("PASS " + raw_input("Input password please: ") + ENDING)
             print self.log_client_socket.recv(1024),
+            self.CWD('/')
             return True
         except:
             print "Unknown host"
@@ -41,6 +47,12 @@ class Client():
                 if line[0:3] == num:
                     print line[4:]
                     return line
+
+    def set_mode(self, mode):
+        if self.mode == mode:
+            print 'Already in ' + mode + ' mode'
+        else:
+            self.mode = mode
 
     def AUTH(self, mechanism):
         self.log_client_socket.send("AUTH " + mechanism + ENDING)
@@ -58,12 +70,12 @@ class Client():
         self.log_client_socket.send("APPE" + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def CWD(self):
-        self.log_client_socket.send("CWD" + ENDING)
+    def CWD(self, path):
+        self.log_client_socket.send("CWD " + path + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def DELE(self):
-        self.log_client_socket.send("DELE" + ENDING)
+    def DELE(self, name):
+        self.log_client_socket.send("DELE " + name + ENDING)
         print self.log_client_socket.recv(1024),
 
     def FEAT(self):
@@ -72,12 +84,15 @@ class Client():
 
     def LIT_HELP(self):
         self.log_client_socket.send("help" + ENDING)
-        ret = self.log_client_socket.recv(1024)
-        ret += self.log_client_socket.recv(1024)
-        print ret[:-11]
+        ret = log_client_socket.recv(1024)
+        ret = 'aaa'
+        while ret[0:3] != '214':
+            ret = log_client_socket.recv(1024)
+            print ret,
 
-    def LIST(self, argument=""):
-        self.log_client_socket.send("NLST" + ENDING)
+    def LIST(self):
+        self.PORT()
+        self.log_client_socket.send("LIST" + ENDING)
         print self.log_client_socket.recv(1024),
 
     def MODE(self):
@@ -85,19 +100,20 @@ class Client():
         print self.log_client_socket.recv(1024),
 
     def NLST(self):
-        self.LIST()
+        self.PORT()
+        log_client_socket.send('NLST' + ENDING)
         print self.log_client_socket.recv(1024),
 
     def NOOP(self):
-        self.log_client_socket.send("NOOP" + ENDING)
+        log_client_socket.send('NOOP' + ENDING)
+        print log_client_socket.recv(1024),
+
+    def OPTS(self, mode, of):
+        self.log_client_socket.send("OPTS " + mod + ' ' + of + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def OPTS(self):
-        self.log_client_socket.send("OPTS" + ENDING)
-        print self.log_client_socket.recv(1024),
-
-    def PASSW(self):
-        self.log_client_socket.send("PASSW" + ENDING)
+    def PASS(self):
+        self.log_client_socket.send("PASS" + ENDING)
         print self.log_client_socket.recv(1024),
 
     def PASV(self):
@@ -120,27 +136,28 @@ class Client():
         self.log_client_socket.send("REST" + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def REST_S(self):
-        self.log_client_socket.send("REST_S" + ENDING)
+    def REST_(self):
+        self.log_client_socket.send("REST+" + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def RNFR(self):
-        self.log_client_socket.send("RNFR" + ENDING)
+    def RETR(self):
+        self.log_client_socket.send("RETR" + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def RNTO(self):
-        self.log_client_socket.send("RNTO" + ENDING)
+    def RNFR(self, name, new_name):
+        self.log_client_socket.send("RNFR " + name + ENDING)
+        print self.log_client_socket.recv(1024),
+        self.log_client_socket.send("RNTO " + new_name + ENDING)
         print self.log_client_socket.recv(1024),
 
     def SITE(self):
         self.log_client_socket.send("SITE" + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def STAT(self):
-        self.log_client_socket.send("STAT" + ENDING)
-        print self.log_client_socket.recv(1024),
+    def STAT(self, type, verbose, bell, prompting, globbing, debugging, hash):
+        print 'Type: ascii; Verbose: On ; Bell: On ; Prompting: On ; Globbing: On Debugging: Off ; Hash mark printing: Off'
 
-    def STOR(self):
+    def STOR(self):  # put/send
         self.log_client_socket.send("STOR" + ENDING)
         print self.log_client_socket.recv(1024),
 
@@ -148,23 +165,13 @@ class Client():
         self.log_client_socket.send("STRU" + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def TYPE(self):
-        self.log_client_socket.send("TYPE" + ENDING)
+    def TYPE(self, type):
+        self.log_client_socket.send("TYPE " + type + ENDING)
         print self.log_client_socket.recv(1024),
 
     def USER(self):
         self.log_client_socket.send("USER" + ENDING)
         print self.log_client_socket.recv(1024),
-
-
-def handle(client, com, status):
-    if com[0] == 'help':
-        print COMMANDS
-
-
-def lit_handle(client, com):
-    if com[0] == 'help':
-        client.LIT_HELP()
 
 
 def main():
@@ -179,8 +186,9 @@ def main():
                 'cd', 'help', 'mput', 'rename',
                 'close', 'lcd', 'open', 'rmdir']
     connected = False
-    ser = raw_input(start_line).split(" ")
+    ser = 'None'
     while ser[0] not in ['quit', 'bye']:
+        ser = raw_input(start_line).split(' ')
         if ser[0] == "open":
             if not connected:
                 a = Client()
@@ -195,10 +203,9 @@ def main():
             a.QUIT()
             connected = False
         if ser[0] in commands:
-            handle(a, ser, connected)
+            handle.handle(a, ser, connected)
         else:
             print "invalid command"
-        ser = raw_input(start_line).split(' ')
     if connected:
         a.QUIT()
 
