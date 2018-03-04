@@ -18,9 +18,10 @@ bye             hash            mls             remotehelp
 cd              help            mput            rename
 close           lcd             open            rmdir"""
 
+
 class Client():
     def __init__(self):
-        self.pstatus = False
+        self.status = False
         self.mode = 'ascii'
         self.FTP_PORT = 21
         self.log_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -82,7 +83,7 @@ class Client():
         self.log_client_socket.send("FEAT" + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def LIT_HELP(self):
+    def HELP(self):
         self.log_client_socket.send("help" + ENDING)
         ret = log_client_socket.recv(1024)
         ret = 'aaa'
@@ -93,7 +94,9 @@ class Client():
     def LIST(self):
         self.PORT()
         self.log_client_socket.send("LIST" + ENDING)
-        print self.log_client_socket.recv(1024),
+        ret = self.log_client_socket.recv(1024),
+        while ret[0:3] != 226:
+            ret = self.log_client_socket.recv(1024),
 
     def MODE(self):
         self.log_client_socket.send("MODE" + ENDING)
@@ -102,7 +105,9 @@ class Client():
     def NLST(self):
         self.PORT()
         log_client_socket.send('NLST' + ENDING)
-        print self.log_client_socket.recv(1024),
+        ret = self.log_client_socket.recv(1024),
+        while ret[0:3] != 226:
+            ret = self.log_client_socket.recv(1024),
 
     def NOOP(self):
         log_client_socket.send('NOOP' + ENDING)
@@ -112,9 +117,11 @@ class Client():
         self.log_client_socket.send("OPTS " + mod + ' ' + of + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def PASS(self):
-        self.log_client_socket.send("PASS" + ENDING)
-        print self.log_client_socket.recv(1024),
+    def PASS(self, password):
+        self.log_client_socket.send("PASS " + password + ENDING)
+        ret = self.log_client_socket.recv(1024),
+        if ret[0:3] == '230':
+            self.status = True
 
     def PASV(self):
         self.log_client_socket.send("PASV" + ENDING)
@@ -136,13 +143,20 @@ class Client():
         self.log_client_socket.send("REST" + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def REST_(self):
+    def RESTP(self):
         self.log_client_socket.send("REST+" + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def RETR(self):
-        self.log_client_socket.send("RETR" + ENDING)
-        print self.log_client_socket.recv(1024),
+    def RETR(self, local_name, remote_name):
+        ret = self.log_client_socket.send("RETR " + remote_name + ENDING)
+        if ret[0:3] != '150':
+            print self.log_client_socket.recv(1024),
+        else:
+            with open(local_name) as a:
+                while ret[0:3] != 226:
+                    ret = log_client_socket.recv(BITSIZE)
+                    if ret[0:3] != 226:
+                        a.write(ret)
 
     def RNFR(self, name, new_name):
         self.log_client_socket.send("RNFR " + name + ENDING)
@@ -155,11 +169,18 @@ class Client():
         print self.log_client_socket.recv(1024),
 
     def STAT(self, type, verbose, bell, prompting, globbing, debugging, hash):
-        print 'Type: ascii; Verbose: On ; Bell: On ; Prompting: On ; Globbing: On Debugging: Off ; Hash mark printing: Off'
+        print 'Type: {}; Verbose: {}; Bell: {}; Prompting: {}; Globbing: On Debugging: {}; Hash mark printing: {}'\
+            .format(type, verbose, bell, prompting, globbing, debugging, hash)
 
-    def STOR(self):  # put/send
-        self.log_client_socket.send("STOR" + ENDING)
-        print self.log_client_socket.recv(1024),
+    def STOR(self, local_name, remote_name):  # put/send
+        ret = self.log_client_socket.send("STOR " + remote_name + ENDING)
+        if ret[0:3] != '150':
+            print self.log_client_socket.recv(1024),
+        else:
+            with open(local_name) as a:
+                for line in a:
+                    self.log_client_socket.send(line)
+            print self.log_client_socket.recv(1024)
 
     def STRU(self):
         self.log_client_socket.send("STRU" + ENDING)
@@ -169,8 +190,8 @@ class Client():
         self.log_client_socket.send("TYPE " + type + ENDING)
         print self.log_client_socket.recv(1024),
 
-    def USER(self):
-        self.log_client_socket.send("USER" + ENDING)
+    def USER(self, user_name):
+        self.log_client_socket.send("USER " + user_name + ENDING)
         print self.log_client_socket.recv(1024),
 
 
