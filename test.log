@@ -1,0 +1,17 @@
+2018-03-06 07:06:50,276 - INFO - ('530 Please log in with USER and PASS first.\r\n',)
+2018-03-06 07:06:50,493 - INFO - ('331 Password required for demo-user\r\n',)
+2018-03-06 07:07:21,352 - INFO - ('',)
+2018-03-06 07:07:21,354 - INFO - ('',)
+2018-03-06 07:08:19,289 - INFO - ('530 Please log in with USER and PASS first.\r\n',)
+2018-03-06 07:08:19,510 - INFO - ('331 Password required for demo-user\r\n',)
+2018-03-06 07:08:19,739 - INFO - None
+2018-03-06 07:08:19,984 - INFO - ('250 CWD command successful. "/" is current directory.\r\n',)
+2018-03-06 07:14:31,497 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 07:14:31,716 - INFO - 331 Password required for demo-user
+
+2018-03-06 07:14:31,937 - INFO - None
+2018-03-06 07:14:32,213 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 07:16:03,112 - INFO - 530 Please log in with USER and PASS first.
+
