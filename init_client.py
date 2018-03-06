@@ -23,6 +23,13 @@ close           lcd             open            rmdir"""
 class Client():
     def __init__(self):
         self.ip = None
+        self.type = 'I' # (I binary/A ascii)
+        self.verbose = True
+        self.bell = False
+        self.prompt = True
+        self.glob = True
+        self.debug = False
+        self.hash = False
         self.command_dict = {'AUTH': self.AUTH, 'ACCT': self.ACCT, 'ALLO': self.ALLO, 'APPE': self.APPE,
                              'CWD': self.CWD, 'DELE': self.DELE, 'FEAT': self.FEAT, 'HELP': self.HELP,
                              'LIST': self.LIST, 'MODE': self.MODE, 'NLST': self.NLST, 'NOOP': self.NOOP,
@@ -228,14 +235,15 @@ class Client():
             .format(type, verbose, bell, prompting, globbing, debugging, hash)
 
     def STOR(self, names):  # put/send
+        self.PASV()
         ret = self.log_client_socket.send("STOR " + names[1] + ENDING)
         if ret[0:3] != '150':
             return self.log_client_socket.recv(1024)
         else:
-            with open(names[0]) as a:
+            with open(names[0], 'rb') as a:
                 for line in a:
-                    self.log_client_socket.send(line)
-            return self.log_client_socket.recv(1024)
+                    self.trans_client_socket.send(line)
+            return self.trans_client_socket.recv(1024)
 
     def STRU(self):
         self.log_client_socket.send("STRU" + ENDING)
