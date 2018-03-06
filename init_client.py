@@ -26,18 +26,18 @@ class Client():
                              'LIST': self.LIST, 'MODE': self.MODE, 'NLST': self.NLST, 'NOOP': self.NOOP,
                              'OPTS': self.OPTS, 'PASS': self.PASS, 'PASV': self.PASV, 'PORT': self.PORT,
                              'QUIT': self.QUIT, 'REIN': self.REIN, 'REST': self.REST, 'RESTP': self.RESTP,
-                             'RETR': self.RETR, 'RNFR': self.RNFR, 'SITE': self.SITE, 'STAT': self.STAT,
-                             'STOR': self.STOR, 'STRU': self.STRU, 'TYPE': self.TYPE, 'USER': self.USER
+                             'RETR': self.RETR, 'RNFR': self.RNFR, 'RNTO': self.RNTO, 'SITE': self.SITE,
+                             'STAT': self.STAT, 'STOR': self.STOR, 'STRU': self.STRU, 'TYPE': self.TYPE,
+                             'USER': self.USER
         }
         self.status = False
         self.mode = 'ascii'
-        self.FTP_PORT = 21
         self.log_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.trans_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    def connect(self, ip):
+    def connect(self, ip, port=21):
         try:
-            self.log_client_socket.connect((ip, self.FTP_PORT))
+            self.log_client_socket.connect((ip, int(port)))
             return self.log_client_socket.recv(1024)
         except:
             return "Unknown host"
@@ -69,13 +69,13 @@ class Client():
                     return line
 
     def set_mode(self, mode):
-        if self.mode == mode:
+        if self.mode == mode[0]:
             print 'Already in ' + mode + ' mode'
         else:
-            self.mode = mode
+            self.mode = mode[0]
 
     def AUTH(self, mechanism):
-        self.log_client_socket.send("AUTH " + mechanism + ENDING)
+        self.log_client_socket.send("AUTH " + mechanism[0] + ENDING)
         return self.log_client_socket.recv(1024)
 
     def ACCT(self):
@@ -91,11 +91,11 @@ class Client():
         return self.log_client_socket.recv(1024)
 
     def CWD(self, path):
-        self.log_client_socket.send("CWD " + path + ENDING)
+        self.log_client_socket.send("CWD " + path[0] + ENDING)
         return self.log_client_socket.recv(1024)
 
     def DELE(self, name):
-        self.log_client_socket.send("DELE " + name + ENDING)
+        self.log_client_socket.send("DELE " + name[0] + ENDING)
         return self.log_client_socket.recv(1024)
 
     def FEAT(self):
@@ -104,10 +104,10 @@ class Client():
 
     def HELP(self):
         self.log_client_socket.send("help" + ENDING)
-        ret = log_client_socket.recv(1024)
+        ret = self.log_client_socket.recv(1024)
         ret = 'aaa'
         while ret[0:3] != '214':
-            ret = log_client_socket.recv(1024)
+            ret = self.log_client_socket.recv(1024)
             print ret,
 
     def LIST(self):
@@ -123,21 +123,21 @@ class Client():
 
     def NLST(self):
         self.PORT()
-        log_client_socket.send('NLST' + ENDING)
+        self.log_client_socket.send('NLST' + ENDING)
         ret = self.log_client_socket.recv(1024)
         while ret[0:3] != 226:
             ret = self.log_client_socket.recv(1024)
 
     def NOOP(self):
-        log_client_socket.send('NOOP' + ENDING)
-        print log_client_socket.recv(1024)
+        self.log_client_socket.send('NOOP' + ENDING)
+        return self.log_client_socket.recv(1024)
 
-    def OPTS(self, mode, of):
-        self.log_client_socket.send("OPTS " + mode + ' ' + of + ENDING)
+    def OPTS(self, params):
+        self.log_client_socket.send("OPTS " + params[0] + ' ' + params[1] + ENDING)
         return self.log_client_socket.recv(1024)
 
     def PASS(self, password):
-        self.log_client_socket.send("PASS " + password + ENDING)
+        self.log_client_socket.send("PASS " + password[0] + ENDING)
         ret = self.log_client_socket.recv(1024)
         if ret[0:3] == '230':
             self.status = True
@@ -149,11 +149,11 @@ class Client():
     def PORT(self, port):
         my_ip = socket.gethostbyname(socket.gethostname())
         my_ip = my_ip.replace('.', ',')
-        arg_high = port / 256
-        arg_low = port % 256
+        arg_high = port[0] / 256
+        arg_low = port[0] % 256
         arg = my_ip + "," + str(arg_high) + "," + str(arg_low)
         self.log_client_socket.send("PORT " + arg + ENDING)
-        self.trans_client_socket.connect((self.FTP_IP, port))
+        self.trans_client_socket.connect((self.FTP_IP, port[0]))
         return self.log_client_socket.recv(1024)
 
     def QUIT(self):
@@ -180,14 +180,18 @@ class Client():
         else:
             with open(local_name) as a:
                 while ret[0:3] != 226:
-                    ret = log_client_socket.recv(BITSIZE)
+                    ret = self.log_client_socket.recv(BITSIZE)
                     if ret[0:3] != 226:
                         a.write(ret)
 
-    def RNFR(self, name, new_name):
-        self.log_client_socket.send("RNFR " + name + ENDING)
-        return self.log_client_socket.recv(1024)
-        self.log_client_socket.send("RNTO " + new_name + ENDING)
+    def RNFR(self, names):
+        self.log_client_socket.send("RNFR " + names[0] + ENDING)
+        msg = self.log_client_socket.recv(1024)
+        msg2 = self.RNTO(names[1])
+        return msg + msg2
+
+    def RNTO(self, name, msg):
+        self.log_client_socket.send("RNTO " + name[0] + ENDING)
         return self.log_client_socket.recv(1024)
 
     def SITE(self):
@@ -198,12 +202,12 @@ class Client():
         print 'Type: {}; Verbose: {}; Bell: {}; Prompting: {}; Globbing: On Debugging: {}; Hash mark printing: {}'\
             .format(type, verbose, bell, prompting, globbing, debugging, hash)
 
-    def STOR(self, local_name, remote_name):  # put/send
-        ret = self.log_client_socket.send("STOR " + remote_name + ENDING)
+    def STOR(self, names):  # put/send
+        ret = self.log_client_socket.send("STOR " + names[1] + ENDING)
         if ret[0:3] != '150':
             return self.log_client_socket.recv(1024)
         else:
-            with open(local_name) as a:
+            with open(names[0]) as a:
                 for line in a:
                     self.log_client_socket.send(line)
             return self.log_client_socket.recv(1024)
@@ -213,11 +217,11 @@ class Client():
         return self.log_client_socket.recv(1024)
 
     def TYPE(self, type):
-        self.log_client_socket.send("TYPE " + type + ENDING)
+        self.log_client_socket.send("TYPE " + type[0] + ENDING)
         return self.log_client_socket.recv(1024)
 
     def USER(self, user_name):
-        self.log_client_socket.send("USER " + user_name + ENDING)
+        self.log_client_socket.send("USER " + user_name[0] + ENDING)
         return self.log_client_socket.recv(1024)
 
 

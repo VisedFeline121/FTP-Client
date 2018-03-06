@@ -126,7 +126,7 @@ class Client_GUI(tk.Frame):
         self.command_label = tk.Label(self.master,
                                       text="Send Arbitrary Command:").grid(row=3, column=0)
         self.command_entry = tk.Entry(self.master, textvariable=self.command_var).grid(row=3, column=1)
-        self.command_button = tk.Button(self.master, text="Send Command", command=self.send_command).grid(row=3, column=2)
+        self.command_button = tk.Button(self.master, text="Send Command", command=self.add_to_log).grid(row=3, column=2)
 
     def insert_dirs_to_tree(self, tree, parent_id, dir_id, content):
         for i in content:
@@ -137,15 +137,30 @@ class Client_GUI(tk.Frame):
             tree.insert(parent_id, 'end', text=i)
 
     def init_socket_connection(self):
-        self.client.connect(self.host_var.get())
-        logging.info(self.client.OPTS('UTF8', 'ON'))
+        if self.port_var.get() != '':
+            self.client.connect(self.host_var.get(), self.port_var.get())
+        else:
+            self.client.connect(self.host_var.get())
+        #logging.info(self.client.OPTS(['UTF8', 'ON']))
         #logging.info(self.client.get_response())
-        logging.info(self.client.USER(self.user_var.get()))
-        logging.info(self.client.PASS(self.password_var.get()))
-        logging.info(self.client.CWD('/'))
+        logging.info(self.client.USER([self.user_var.get()]))
+        logging.info(self.client.PASS([self.password_var.get()]))
+        logging.info(self.client.CWD(['/']))
+
+    def add_to_log(self):
+        logging.info(self.send_command())
 
     def send_command(self):
-    
+        raw_command = self.command_var.get()
+        raw_command = raw_command.split(' ')
+        command = raw_command[0]
+        command = command.upper()
+        command = self.client.command_dict[command]
+        if len(raw_command) > 1:
+            params = raw_command[1:]
+            return command(params)
+        else:
+            return command()
 
     def run(self):
         self.master.mainloop()
@@ -159,3 +174,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+#192.168.3.22

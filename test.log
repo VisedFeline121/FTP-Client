@@ -15,3 +15,75 @@
 
 2018-03-06 07:16:03,112 - INFO - 530 Please log in with USER and PASS first.
 
+2018-03-06 10:06:14,900 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:06:15,108 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:06:15,325 - INFO - None
+2018-03-06 10:06:15,549 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:07:11,354 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:27:26,115 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:27:26,311 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:27:26,506 - INFO - None
+2018-03-06 10:27:26,700 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:28:32,630 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:28:32,825 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:28:33,023 - INFO - None
+2018-03-06 10:28:33,219 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:30:36,371 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:30:36,581 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:30:36,792 - INFO - None
+2018-03-06 10:30:37,002 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:30:42,628 - INFO - None
+2018-03-06 10:30:46,441 - INFO - None
+2018-03-06 10:30:47,410 - INFO - None
+2018-03-06 10:30:48,690 - INFO - None
+2018-03-06 10:30:49,420 - INFO - None
+2018-03-06 10:31:37,316 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:31:37,513 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:31:37,710 - INFO - None
+2018-03-06 10:31:37,905 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:31:42,528 - INFO - 200 OK
+
+2018-03-06 10:31:43,467 - INFO - 200 OK
+
+2018-03-06 10:31:43,999 - INFO - 200 OK
+
+2018-03-06 10:32:00,015 - INFO - 200 OPTS UTF8 ON
+
+2018-03-06 10:32:53,750 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:33:01,753 - INFO - None
+2018-03-06 11:30:52,127 - INFO - 331 Please specify password
+
+2018-03-06 11:30:52,128 - INFO - None
+2018-03-06 11:30:52,131 - INFO - 250 Succesfully changed directory
+
+2018-03-06 11:31:15,790 - INFO - 331 Please specify password
+
+2018-03-06 11:31:22,201 - INFO - None
+2018-03-06 11:31:48,318 - INFO - 227 Entering passive mode (192,168,3,26,253,202)
+
+2018-03-06 11:33:39,676 - INFO - 250 Succesfully changed directory
+
+2018-03-06 11:33:56,009 - INFO - 250 Requested file has been deleted
+
+2018-03-06 11:37:57,601 - INFO - 331 Please specify password
+
+2018-03-06 11:37:57,601 - INFO - None
+2018-03-06 11:37:57,601 - INFO - 250 Succesfully changed directory
+
