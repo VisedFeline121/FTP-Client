@@ -2,9 +2,10 @@
 import socket
 import platform
 import handle
+import thread
 
 ENDING = "\r\n"
-BITSIZE = 8
+BITSIZE = 1
 resp = {}
 regex = r"[1-5]\d{2} .+((\n.+){1,2})?"
 start_line = 'ftp> '
@@ -21,10 +22,29 @@ close           lcd             open            rmdir"""
 
 class Client():
     def __init__(self):
+        self.ip = None
+        self.command_dict = {'AUTH': self.AUTH, 'ACCT': self.ACCT, 'ALLO': self.ALLO, 'APPE': self.APPE,
+                             'CWD': self.CWD, 'DELE': self.DELE, 'FEAT': self.FEAT, 'HELP': self.HELP,
+                             'LIST': self.LIST, 'MODE': self.MODE, 'NLST': self.NLST, 'NOOP': self.NOOP,
+                             'OPTS': self.OPTS, 'PASS': self.PASS, 'PASV': self.PASV, 'PORT': self.PORT,
+                             'QUIT': self.QUIT, 'REIN': self.REIN, 'REST': self.REST, 'RESTP': self.RESTP,
+                             'RETR': self.RETR, 'RNFR': self.RNFR, 'RNTO': self.RNTO, 'SITE': self.SITE,
+                             'STAT': self.STAT, 'STOR': self.STOR, 'STRU': self.STRU, 'TYPE': self.TYPE,
+                             'USER': self.USER
+        }
         self.status = False
+        self.file_ended = False
         self.mode = 'ascii'
-        self.FTP_PORT = 21
         self.log_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.trans_client_socket = None
+
+    def connect(self, ip, port=21):
+        self.ip = ip
+        try:
+            self.log_client_socket.connect((ip, int(port)))
+            return self.log_client_socket.recv(1024)
+        except:
+            return "Unknown host"
 
     def init_connection(self, ip):
         try:
@@ -42,6 +62,18 @@ class Client():
             print "Unknown host"
             return False
 
+    def get_response(self):
+        return self.log_client_socket.recv(1024)
+
+    def wait_to_end(self, name, t):
+        ret = ''
+        while ret == '':
+            try:
+                ret = self.log_client_socket.recv(1024)
+            except:
+                print 'Error occured'
+        self.file_ended = True
+
     def get_response_on_command(self, num):
         with open('resps.txt') as res:
             for line in res:
@@ -50,155 +82,178 @@ class Client():
                     return line
 
     def set_mode(self, mode):
-        if self.mode == mode:
+        if self.mode == mode[0]:
             print 'Already in ' + mode + ' mode'
         else:
-            self.mode = mode
+            self.mode = mode[0]
 
     def AUTH(self, mechanism):
-        self.log_client_socket.send("AUTH " + mechanism + ENDING)
-        print self.log_client_socket.recv(1024),
+        self.log_client_socket.send("AUTH " + mechanism[0] + ENDING)
+        return self.log_client_socket.recv(1024)
 
     def ACCT(self):
         self.log_client_socket.send("ACCT" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
     def ALLO(self):
         self.log_client_socket.send("ALLO" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
     def APPE(self):
         self.log_client_socket.send("APPE" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
     def CWD(self, path):
-        self.log_client_socket.send("CWD " + path + ENDING)
-        print self.log_client_socket.recv(1024),
+        self.log_client_socket.send("CWD " + path[0] + ENDING)
+        return self.log_client_socket.recv(1024)
 
     def DELE(self, name):
-        self.log_client_socket.send("DELE " + name + ENDING)
-        print self.log_client_socket.recv(1024),
+        self.log_client_socket.send("DELE " + name[0] + ENDING)
+        return self.log_client_socket.recv(1024)
 
     def FEAT(self):
         self.log_client_socket.send("FEAT" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
     def HELP(self):
         self.log_client_socket.send("help" + ENDING)
-        ret = log_client_socket.recv(1024)
+        ret = self.log_client_socket.recv(1024)
         ret = 'aaa'
         while ret[0:3] != '214':
-            ret = log_client_socket.recv(1024)
+            ret = self.log_client_socket.recv(1024)
             print ret,
 
     def LIST(self):
         self.PORT()
         self.log_client_socket.send("LIST" + ENDING)
-        ret = self.log_client_socket.recv(1024),
+        ret = self.log_client_socket.recv(1024)
         while ret[0:3] != 226:
-            ret = self.log_client_socket.recv(1024),
+            ret = self.log_client_socket.recv(1024)
 
     def MODE(self):
         self.log_client_socket.send("MODE" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
     def NLST(self):
         self.PORT()
-        log_client_socket.send('NLST' + ENDING)
-        ret = self.log_client_socket.recv(1024),
+        self.log_client_socket.send('NLST' + ENDING)
+        ret = self.log_client_socket.recv(1024)
         while ret[0:3] != 226:
-            ret = self.log_client_socket.recv(1024),
+            ret = self.log_client_socket.recv(1024)
 
     def NOOP(self):
-        log_client_socket.send('NOOP' + ENDING)
-        print log_client_socket.recv(1024),
+        self.log_client_socket.send('NOOP' + ENDING)
+        return self.log_client_socket.recv(1024)
 
-    def OPTS(self, mode, of):
-        self.log_client_socket.send("OPTS " + mod + ' ' + of + ENDING)
-        print self.log_client_socket.recv(1024),
+    def OPTS(self, params):
+        self.log_client_socket.send("OPTS " + params[0] + ' ' + params[1] + ENDING)
+        return self.log_client_socket.recv(1024)
 
     def PASS(self, password):
-        self.log_client_socket.send("PASS " + password + ENDING)
-        ret = self.log_client_socket.recv(1024),
+        self.log_client_socket.send("PASS " + password[0] + ENDING)
+        ret = self.log_client_socket.recv(1024)
         if ret[0:3] == '230':
             self.status = True
 
     def PASV(self):
+        self.trans_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.log_client_socket.send("PASV" + ENDING)
-        print self.log_client_socket.recv(1024),
+        response = self.log_client_socket.recv(1024)
+        print response
+        response = response.split('(')[1][:-3]
+        ip = '.'.join(response.split(',')[0:4])
+        port = response.split(',')[4:]
+        port = int(port[0]) * 256 + int(port[1])
+        self.trans_client_socket.connect((ip, port))
 
-    def PORT(self):
-        self.log_client_socket.send("PORT" + ENDING)
-        print self.log_client_socket.recv(1024),
+    def PORT(self, port):
+        my_ip = socket.gethostbyname(socket.gethostname())
+        my_ip = my_ip.replace('.', ',')
+        arg_high = port[0] / 256
+        arg_low = port[0] % 256
+        arg = my_ip + "," + str(arg_high) + "," + str(arg_low)
+        self.log_client_socket.send("PORT " + arg + ENDING)
+        self.trans_client_socket.connect((self.ip, port[0]))
+        return self.log_client_socket.recv(1024)
 
     def QUIT(self):
         self.log_client_socket.send("QUIT" + ENDING)
-        print self.log_client_socket.recv(1024),
+        ret =  self.log_client_socket.recv(1024)
+        self.log_client_socket.close()
+        return ret
 
     def REIN(self):
         self.log_client_socket.send("REIN" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
     def REST(self):
         self.log_client_socket.send("REST" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
     def RESTP(self):
         self.log_client_socket.send("REST+" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
-    def RETR(self, local_name, remote_name):
-        ret = self.log_client_socket.send("RETR " + remote_name + ENDING)
-        if ret[0:3] != '150':
-            print self.log_client_socket.recv(1024),
+    def RETR(self, names):
+        self.PASV()
+        self.log_client_socket.send("RETR " + names[1] + ENDING)
+        ret = self.log_client_socket.recv(1024)
+        ans = ''
+        thread.start_new_thread(self.wait_to_end, ('myThread', 1,))
+        if ret[:3] != '150':
+            return ret
         else:
-            with open(local_name) as a:
-                while ret[0:3] != 226:
-                    ret = log_client_socket.recv(BITSIZE)
-                    if ret[0:3] != 226:
-                        a.write(ret)
+            with open(names[0], 'ab') as a:
+                while not self.file_ended:
+                    ret = self.trans_client_socket.recv(1460)
+                    a.write(ret)
+        self.trans_client_socket.close()
 
-    def RNFR(self, name, new_name):
-        self.log_client_socket.send("RNFR " + name + ENDING)
-        print self.log_client_socket.recv(1024),
-        self.log_client_socket.send("RNTO " + new_name + ENDING)
-        print self.log_client_socket.recv(1024),
+    def RNFR(self, names):
+        self.log_client_socket.send("RNFR " + names[0] + ENDING)
+        msg = self.log_client_socket.recv(1024)
+        msg2 = self.RNTO(names[1])
+        return msg + msg2
+
+    def RNTO(self, name):
+        self.log_client_socket.send("RNTO " + name[0] + ENDING)
+        return self.log_client_socket.recv(1024)
 
     def SITE(self):
         self.log_client_socket.send("SITE" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
     def STAT(self, type, verbose, bell, prompting, globbing, debugging, hash):
         print 'Type: {}; Verbose: {}; Bell: {}; Prompting: {}; Globbing: On Debugging: {}; Hash mark printing: {}'\
             .format(type, verbose, bell, prompting, globbing, debugging, hash)
 
-    def STOR(self, local_name, remote_name):  # put/send
-        ret = self.log_client_socket.send("STOR " + remote_name + ENDING)
+    def STOR(self, names):  # put/send
+        ret = self.log_client_socket.send("STOR " + names[1] + ENDING)
         if ret[0:3] != '150':
-            print self.log_client_socket.recv(1024),
+            return self.log_client_socket.recv(1024)
         else:
-            with open(local_name) as a:
+            with open(names[0]) as a:
                 for line in a:
                     self.log_client_socket.send(line)
-            print self.log_client_socket.recv(1024)
+            return self.log_client_socket.recv(1024)
 
     def STRU(self):
         self.log_client_socket.send("STRU" + ENDING)
-        print self.log_client_socket.recv(1024),
+        return self.log_client_socket.recv(1024)
 
     def TYPE(self, type):
-        self.log_client_socket.send("TYPE " + type + ENDING)
-        print self.log_client_socket.recv(1024),
+        self.log_client_socket.send("TYPE " + type[0] + ENDING)
+        return self.log_client_socket.recv(1024)
 
     def USER(self, user_name):
-        self.log_client_socket.send("USER " + user_name + ENDING)
-        print self.log_client_socket.recv(1024),
+        self.log_client_socket.send("USER " + user_name[0] + ENDING)
+        return self.log_client_socket.recv(1024)
 
 
 def main():
     a = None
     commands = ['!', 'delete', 'literal', 'prompt', 'send',
-                '?', 'debug', 'ls', 'put', 'status',
+                '?', 'debug', 'ls', 'put', 'status', 'port',
                 'append', 'dir', 'mdelete', 'pwd', 'trace',
                 'ascii', 'disconnect', 'mdir', 'quit', 'type',
                 'bell', 'get', 'mget', 'quote', 'user',
