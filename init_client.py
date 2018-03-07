@@ -50,7 +50,7 @@ class Client():
         try:
             self.log_client_socket.connect((ip, int(port)))
             return self.log_client_socket.recv(1024)
-        except:
+        except Exception:
             return "Unknown host"
 
     def init_connection(self, ip):
@@ -154,13 +154,14 @@ class Client():
 
     def OPTS(self, params):
         self.log_client_socket.send("OPTS " + params[0] + ' ' + params[1] + ENDING)
-        return self.log_client_socket.recv(1024)
+        return self.get_response()
 
     def PASS(self, password):
         self.log_client_socket.send("PASS " + password[0] + ENDING)
         ret = self.log_client_socket.recv(1024)
-        if ret[0:3] == '230':
+        if ret[:3] == '230':
             self.status = True
+        return ret
 
     def PASV(self):
         self.trans_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
