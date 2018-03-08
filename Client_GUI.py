@@ -8,7 +8,8 @@ from os import listdir, chdir
 from os.path import isfile, join
 #import _tkinter
 
-PATH = r'C:\Users\user\Desktop'
+PATH = r'C:\Heights'
+SERVERPATH = '\\'
 
 
 class TextHandler(logging.Handler):
@@ -57,10 +58,10 @@ class ClientGUI(Tk.Frame):
         self.connect_button = None
 
         self.host_var = Tk.StringVar(self.master, value='localhost')
-        self.user_var = Tk.StringVar(self.master, value='user')
-        self.password_var = Tk.StringVar(self.master, value='pass')
+        self.user_var = Tk.StringVar(self.master, value='ido')
+        self.password_var = Tk.StringVar(self.master, value='1234')
         self.port_var = Tk.StringVar(self.master, value='21')
-        self.command_var = Tk.StringVar(self.master, value='retr sup.txt sup.txt')
+        self.command_var = Tk.StringVar(self.master, value='LIST')
         self.local_dir_var = PATH
 
         self.master.option_add("*tearOff", 'False')
@@ -124,7 +125,7 @@ class ClientGUI(Tk.Frame):
 
         list_of_dirs = [d for d in listdir(PATH) if not isfile(join(PATH, d))]
         self.user_tree.insert('', 'end', PATH, text=PATH)
-        self.recursive_dirs(PATH, list_of_dirs)
+        self.recursive_dirs(self.user_tree, PATH, list_of_dirs)
         self.user_tree.tag_bind('dir', '<1>', self.change_header)
         self.user_tree.grid(row=2, columnspan=4, sticky='nswe')
 
@@ -159,6 +160,7 @@ class ClientGUI(Tk.Frame):
         logging.info(self.client.USER([self.user_var.get()]))
         logging.info(self.client.PASS([self.password_var.get()]))
         logging.info(self.client.CWD(['/']))
+        self.add_server_info()
 
     def add_to_log(self):
         logging.info(self.send_command())
@@ -178,21 +180,19 @@ class ClientGUI(Tk.Frame):
     def run(self):
         self.master.mainloop()
 
-    def recursive_dirs(self, dir_path, current_dirs):
+    def recursive_dirs(self, tree, dir_path, current_dirs):
         files_in_dir = [f for f in listdir(dir_path) if isfile(join(dir_path, f))]
         for a_dir in current_dirs:
             this_dir_path = join(dir_path, a_dir)
 
             try:
                 new_dirs = [d for d in listdir(this_dir_path) if not isfile(join(this_dir_path, d))]
-                self.insert_dirs_to_tree(self.user_tree, dir_path, this_dir_path, new_dirs)
+                self.insert_dirs_to_tree(tree, dir_path, this_dir_path, new_dirs)
                 self.recursive_dirs(this_dir_path, new_dirs)
             except WindowsError:
                 pass
             except TypeError:
                 pass
-
-
 
         try:
             self.insert_files_to_tree(self.user_tree, dir_path, files_in_dir)
@@ -204,6 +204,12 @@ class ClientGUI(Tk.Frame):
         chdir(self.local_dir_var)
         self.user_tree.heading('#0', text=self.local_dir_var)
 
+    def add_server_info(self):
+        dir_content = self.client.NLST()
+        dirs_in_dir = [d for d in dir_content if not '.' in d]
+
+        self.server_tree.insert('', 'end', SERVERPATH, text=SERVERPATH)
+        self.recursive_dirs(self.server_tree, SERVERPATH, dirs_in_dir)
 
 def main():
     master = Tk.Tk()
