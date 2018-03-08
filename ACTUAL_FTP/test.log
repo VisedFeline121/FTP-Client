@@ -1,0 +1,480 @@
+2018-03-06 07:06:50,276 - INFO - ('530 Please log in with USER and PASS first.\r\n',)
+2018-03-06 07:06:50,493 - INFO - ('331 Password required for demo-user\r\n',)
+2018-03-06 07:07:21,352 - INFO - ('',)
+2018-03-06 07:07:21,354 - INFO - ('',)
+2018-03-06 07:08:19,289 - INFO - ('530 Please log in with USER and PASS first.\r\n',)
+2018-03-06 07:08:19,510 - INFO - ('331 Password required for demo-user\r\n',)
+2018-03-06 07:08:19,739 - INFO - None
+2018-03-06 07:08:19,984 - INFO - ('250 CWD command successful. "/" is current directory.\r\n',)
+2018-03-06 07:14:31,497 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 07:14:31,716 - INFO - 331 Password required for demo-user
+
+2018-03-06 07:14:31,937 - INFO - None
+2018-03-06 07:14:32,213 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 07:16:03,112 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:06:14,900 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:06:15,108 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:06:15,325 - INFO - None
+2018-03-06 10:06:15,549 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:07:11,354 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:27:26,115 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:27:26,311 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:27:26,506 - INFO - None
+2018-03-06 10:27:26,700 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:28:32,630 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:28:32,825 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:28:33,023 - INFO - None
+2018-03-06 10:28:33,219 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:30:36,371 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:30:36,581 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:30:36,792 - INFO - None
+2018-03-06 10:30:37,002 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:30:42,628 - INFO - None
+2018-03-06 10:30:46,441 - INFO - None
+2018-03-06 10:30:47,410 - INFO - None
+2018-03-06 10:30:48,690 - INFO - None
+2018-03-06 10:30:49,420 - INFO - None
+2018-03-06 10:31:37,316 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-06 10:31:37,513 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:31:37,710 - INFO - None
+2018-03-06 10:31:37,905 - INFO - 250 CWD command successful. "/" is current directory.
+
+2018-03-06 10:31:42,528 - INFO - 200 OK
+
+2018-03-06 10:31:43,467 - INFO - 200 OK
+
+2018-03-06 10:31:43,999 - INFO - 200 OK
+
+2018-03-06 10:32:00,015 - INFO - 200 OPTS UTF8 ON
+
+2018-03-06 10:32:53,750 - INFO - 331 Password required for demo-user
+
+2018-03-06 10:33:01,753 - INFO - None
+2018-03-06 11:30:52,127 - INFO - 331 Please specify password
+
+2018-03-06 11:30:52,128 - INFO - None
+2018-03-06 11:30:52,131 - INFO - 250 Succesfully changed directory
+
+2018-03-06 11:31:15,790 - INFO - 331 Please specify password
+
+2018-03-06 11:31:22,201 - INFO - None
+2018-03-06 11:31:48,318 - INFO - 227 Entering passive mode (192,168,3,26,253,202)
+
+2018-03-06 11:33:39,676 - INFO - 250 Succesfully changed directory
+
+2018-03-06 11:33:56,009 - INFO - 250 Requested file has been deleted
+
+2018-03-06 11:37:57,601 - INFO - 331 Please specify password
+
+2018-03-06 11:37:57,601 - INFO - None
+2018-03-06 11:37:57,601 - INFO - 250 Succesfully changed directory
+
+2018-03-06 12:55:01,578 - INFO - 331 Password required for ido
+
+2018-03-06 12:55:01,579 - INFO - None
+2018-03-06 12:55:01,581 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 12:59:35,698 - INFO - 331 Password required for ido
+
+2018-03-06 12:59:35,700 - INFO - None
+2018-03-06 12:59:35,700 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:02:45,878 - INFO - 331 Password required for ido
+
+2018-03-06 13:02:45,881 - INFO - None
+2018-03-06 13:02:45,881 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:03:30,186 - INFO - 331 Password required for ido
+
+2018-03-06 13:03:30,187 - INFO - None
+2018-03-06 13:03:30,188 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:04:53,344 - INFO - 331 Password required for ido
+
+2018-03-06 13:04:53,345 - INFO - None
+2018-03-06 13:04:53,346 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:07:08,197 - INFO - 331 Password required for ido
+
+2018-03-06 13:07:08,198 - INFO - None
+2018-03-06 13:07:08,200 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:08:03,058 - INFO - 331 Password required for ido
+
+2018-03-06 13:08:03,058 - INFO - None
+2018-03-06 13:08:03,059 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:08:15,940 - INFO - None
+2018-03-06 13:23:25,365 - INFO - 331 Password required for ido
+
+2018-03-06 13:23:25,365 - INFO - None
+2018-03-06 13:23:25,367 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:24:08,369 - INFO - None
+2018-03-06 13:38:33,197 - INFO - 331 Password required for ido
+
+2018-03-06 13:38:33,198 - INFO - None
+2018-03-06 13:38:33,200 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:38:59,792 - INFO - None
+2018-03-06 13:40:07,061 - INFO - 331 Password required for ido
+
+2018-03-06 13:40:07,062 - INFO - None
+2018-03-06 13:40:07,062 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:40:14,250 - INFO - None
+2018-03-06 13:41:18,187 - INFO - 331 Password required for ido
+
+2018-03-06 13:41:18,187 - INFO - None
+2018-03-06 13:41:18,188 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:41:27,115 - INFO - None
+2018-03-06 13:41:53,700 - INFO - 331 Password required for ido
+
+2018-03-06 13:41:53,700 - INFO - None
+2018-03-06 13:41:53,700 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:42:07,312 - INFO - None
+2018-03-06 13:43:45,226 - INFO - 331 Password required for ido
+
+2018-03-06 13:43:45,226 - INFO - None
+2018-03-06 13:43:45,229 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:43:56,963 - INFO - None
+2018-03-06 13:44:19,141 - INFO - 331 Password required for ido
+
+2018-03-06 13:44:19,142 - INFO - None
+2018-03-06 13:44:19,144 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:44:27,838 - INFO - None
+2018-03-06 13:46:12,500 - INFO - 331 Password required for ido
+
+2018-03-06 13:46:12,502 - INFO - None
+2018-03-06 13:46:12,503 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:46:18,907 - INFO - None
+2018-03-06 13:54:39,611 - INFO - 331 Password required for ido
+
+2018-03-06 13:54:39,614 - INFO - None
+2018-03-06 13:54:39,615 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:55:21,480 - INFO - 331 Password required for ido
+
+2018-03-06 13:55:21,482 - INFO - None
+2018-03-06 13:55:21,483 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:55:22,756 - INFO - None
+2018-03-06 13:56:02,155 - INFO - 331 Password required for ido
+
+2018-03-06 13:56:02,157 - INFO - None
+2018-03-06 13:56:02,157 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:56:03,349 - INFO - None
+2018-03-06 13:58:29,023 - INFO - 331 Password required for ido
+
+2018-03-06 13:58:29,025 - INFO - None
+2018-03-06 13:58:29,025 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 13:58:36,736 - INFO - None
+2018-03-06 13:58:59,342 - INFO - None
+2018-03-06 13:59:59,861 - INFO - 331 Password required for ido
+
+2018-03-06 13:59:59,862 - INFO - None
+2018-03-06 13:59:59,864 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 14:00:24,095 - INFO - None
+2018-03-06 14:00:42,236 - INFO - None
+2018-03-06 14:02:36,901 - INFO - 331 Password required for ido
+
+2018-03-06 14:02:36,901 - INFO - None
+2018-03-06 14:02:36,903 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 14:02:39,500 - INFO - None
+2018-03-06 14:03:05,075 - INFO - None
+2018-03-06 14:05:15,532 - INFO - 331 Password required for ido
+
+2018-03-06 14:05:15,532 - INFO - None
+2018-03-06 14:05:15,533 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 14:05:19,250 - INFO - None
+2018-03-06 14:06:41,140 - INFO - 331 Password required for ido
+
+2018-03-06 14:06:41,141 - INFO - None
+2018-03-06 14:06:41,141 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 14:06:43,278 - INFO - None
+2018-03-06 14:07:17,142 - INFO - None
+2018-03-06 14:08:25,743 - INFO - 331 Password required for ido
+
+2018-03-06 14:08:25,744 - INFO - None
+2018-03-06 14:08:25,746 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-06 14:08:42,040 - INFO - None
+2018-03-07 01:03:21,862 - INFO - 331 Password required for ido
+
+2018-03-07 01:03:21,864 - INFO - None
+2018-03-07 01:03:21,865 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 01:05:53,525 - INFO - 331 Password required for ido
+
+2018-03-07 01:05:53,526 - INFO - None
+2018-03-07 01:05:53,528 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 01:07:56,336 - INFO - 331 Password required for ido
+
+2018-03-07 01:07:56,338 - INFO - None
+2018-03-07 01:07:56,339 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 01:08:05,759 - INFO - 200 Type set to I
+
+2018-03-07 01:19:03,305 - INFO - 331 Password required for ido
+
+2018-03-07 01:19:03,306 - INFO - None
+2018-03-07 01:19:03,308 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 01:21:01,180 - INFO - 331 Password required for ido
+
+2018-03-07 01:21:01,183 - INFO - None
+2018-03-07 01:21:01,184 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 19:42:19,523 - INFO - 331 Password required for ido
+
+2018-03-07 19:42:19,525 - INFO - None
+2018-03-07 19:42:19,525 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 19:43:04,414 - INFO - 350 File exists, ready for destination name.
+250 file renamed successfully
+
+2018-03-07 19:45:47,904 - INFO - 331 Password required for ido
+
+2018-03-07 19:45:47,904 - INFO - None
+2018-03-07 19:45:47,907 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 19:45:49,792 - INFO - 350 File exists, ready for destination name.
+250 file renamed successfully
+
+2018-03-07 19:48:34,967 - INFO - 331 Password required for ido
+
+2018-03-07 19:48:34,970 - INFO - None
+2018-03-07 19:48:34,970 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 19:48:36,693 - INFO - 350 File exists, ready for destination name.
+250 file renamed successfully
+
+2018-03-07 19:50:04,487 - INFO - 331 Password required for ido
+
+2018-03-07 19:50:04,489 - INFO - None
+2018-03-07 19:50:04,490 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 19:50:06,592 - INFO - 350 File exists, ready for destination name.
+250 file renamed successfully
+
+2018-03-07 19:50:48,474 - INFO - 331 Password required for ido
+
+2018-03-07 19:50:48,476 - INFO - None
+2018-03-07 19:50:48,476 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 19:50:49,740 - INFO - 350 File exists, ready for destination name.
+250 file renamed successfully
+
+2018-03-07 20:06:34,930 - INFO - 331 Password required for ido
+
+2018-03-07 20:06:34,930 - INFO - None
+2018-03-07 20:06:34,933 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 20:06:36,401 - INFO - 550 File not found
+
+2018-03-07 20:07:33,174 - INFO - 331 Password required for ido
+
+2018-03-07 20:07:33,177 - INFO - None
+2018-03-07 20:07:33,177 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 20:07:35,096 - INFO - None
+2018-03-07 20:08:36,029 - INFO - 331 Password required for ido
+
+2018-03-07 20:08:36,029 - INFO - None
+2018-03-07 20:08:36,030 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 20:09:03,769 - INFO - None
+2018-03-07 20:10:22,694 - INFO - 331 Password required for ido
+
+2018-03-07 20:10:22,694 - INFO - None
+2018-03-07 20:10:22,694 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 20:10:27,763 - INFO - None
+2018-03-07 20:19:47,753 - INFO - 331 Password required for ido
+
+2018-03-07 20:19:47,755 - INFO - None
+2018-03-07 20:19:47,756 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 20:19:51,815 - INFO - None
+2018-03-07 20:23:14,078 - INFO - 331 Password required for ido
+
+2018-03-07 20:23:14,081 - INFO - None
+2018-03-07 20:23:14,082 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 20:23:18,704 - INFO - None
+2018-03-07 20:29:02,836 - INFO - 331 Password required for ido
+
+2018-03-07 20:29:02,838 - INFO - None
+2018-03-07 20:29:02,838 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 20:29:04,993 - INFO - None
+2018-03-07 20:30:11,888 - INFO - None
+2018-03-07 20:30:38,382 - INFO - None
+2018-03-07 20:33:33,269 - INFO - 331 Password required for ido
+
+2018-03-07 20:33:33,270 - INFO - None
+2018-03-07 20:33:33,272 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 20:35:11,960 - INFO - 331 Password required for ido
+
+2018-03-07 20:35:11,961 - INFO - None
+2018-03-07 20:35:11,963 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 22:07:07,793 - INFO - 331 Password required for ido
+
+2018-03-07 22:07:07,795 - INFO - None
+2018-03-07 22:07:07,796 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 22:18:33,569 - INFO - 331 Password required for ido
+
+2018-03-07 22:18:33,571 - INFO - None
+2018-03-07 22:18:33,572 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 22:18:35,084 - INFO - None
+2018-03-07 22:23:16,779 - INFO - 331 Password required for ido
+
+2018-03-07 22:23:16,780 - INFO - None
+2018-03-07 22:23:16,782 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 22:23:21,500 - INFO - None
+2018-03-07 22:24:32,892 - INFO - 331 Password required for ido
+
+2018-03-07 22:24:32,894 - INFO - None
+2018-03-07 22:24:32,894 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 22:24:37,641 - INFO - None
+2018-03-07 22:38:30,849 - INFO - 331 Password required for ido
+
+2018-03-07 22:38:30,851 - INFO - None
+2018-03-07 22:38:30,851 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 22:38:42,153 - INFO - None
+2018-03-07 22:42:04,490 - INFO - 331 Password required for ido
+
+2018-03-07 22:42:04,492 - INFO - None
+2018-03-07 22:42:04,493 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 22:42:06,624 - INFO - None
+2018-03-07 22:42:51,348 - INFO - 331 Password required for ido
+
+2018-03-07 22:42:51,349 - INFO - None
+2018-03-07 22:42:51,351 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 22:42:52,941 - INFO - None
+2018-03-07 22:48:05,605 - INFO - 331 Password required for ido
+
+2018-03-07 22:48:05,608 - INFO - None
+2018-03-07 22:48:05,608 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 22:48:09,848 - INFO - None
+2018-03-07 23:14:13,842 - INFO - 331 Password required for ido
+
+2018-03-07 23:14:13,842 - INFO - None
+2018-03-07 23:14:13,844 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:17:25,513 - INFO - 331 Password required for ido
+
+2018-03-07 23:17:25,515 - INFO - None
+2018-03-07 23:17:25,515 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:17:29,693 - INFO - None
+2018-03-07 23:20:08,842 - INFO - 331 Password required for ido
+
+2018-03-07 23:20:08,844 - INFO - None
+2018-03-07 23:20:08,844 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:20:10,247 - INFO - None
+2018-03-07 23:23:32,619 - INFO - 331 Password required for ido
+
+2018-03-07 23:23:32,621 - INFO - None
+2018-03-07 23:23:32,621 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:23:34,272 - INFO - None
+2018-03-07 23:27:03,684 - INFO - 331 Password required for ido
+
+2018-03-07 23:27:03,687 - INFO - None
+2018-03-07 23:27:03,687 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:27:05,101 - INFO - None
+2018-03-07 23:36:08,240 - INFO - 331 Password required for ido
+
+2018-03-07 23:36:08,242 - INFO - None
+2018-03-07 23:36:08,243 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:41:01,586 - INFO - 331 Password required for ido
+
+2018-03-07 23:41:01,588 - INFO - None
+2018-03-07 23:41:01,589 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:42:27,510 - INFO - 331 Password required for ido
+
+2018-03-07 23:42:27,512 - INFO - None
+2018-03-07 23:42:27,512 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:42:40,230 - INFO - None
+2018-03-07 23:44:55,631 - INFO - 331 Password required for ido
+
+2018-03-07 23:44:55,632 - INFO - None
+2018-03-07 23:44:55,634 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:44:56,786 - INFO - None
+2018-03-07 23:49:23,711 - INFO - 331 Password required for ido
+
+2018-03-07 23:49:23,713 - INFO - None
+2018-03-07 23:49:23,714 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:49:25,305 - INFO - None
+2018-03-07 23:52:58,335 - INFO - 331 Password required for ido
+
+2018-03-07 23:52:58,336 - INFO - None
+2018-03-07 23:52:58,338 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:54:24,861 - INFO - 331 Password required for ido
+
+2018-03-07 23:54:24,862 - INFO - None
+2018-03-07 23:54:24,864 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-07 23:54:26,082 - INFO - None
+2018-03-08 00:16:31,703 - INFO - 331 Password required for ido
+
+2018-03-08 00:16:31,704 - INFO - None
+2018-03-08 00:16:31,707 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 00:16:33,611 - INFO - 221 Goodbye
+
+2018-03-08 00:19:48,404 - INFO - 331 Password required for ido
+
+2018-03-08 00:19:48,404 - INFO - None
+2018-03-08 00:19:48,405 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 00:19:54,598 - INFO - None
