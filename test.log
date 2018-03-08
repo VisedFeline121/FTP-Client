@@ -1,0 +1,184 @@
+2018-03-08 08:34:24,502 - INFO - Unknown host
+2018-03-08 08:35:12,490 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-08 08:35:12,490 - INFO - 331 Password required for user
+
+2018-03-08 08:35:12,490 - INFO - 530 Login or password incorrect!
+
+2018-03-08 08:35:12,490 - INFO - 530 Please log in with USER and PASS first.
+
+2018-03-08 08:35:59,546 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-08 08:35:59,546 - INFO - 331 Password required for user
+
+2018-03-08 08:35:59,546 - INFO - 230 Logged on
+
+2018-03-08 08:35:59,546 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 08:38:04,749 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-08 08:38:04,750 - INFO - 331 Password required for user
+
+2018-03-08 08:38:04,750 - INFO - 230 Logged on
+
+2018-03-08 08:38:04,750 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 08:38:34,316 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-08 08:38:34,316 - INFO - 331 Password required for user
+
+2018-03-08 08:38:34,316 - INFO - 230 Logged on
+
+2018-03-08 08:38:34,318 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 08:39:14,730 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-08 08:39:14,730 - INFO - 331 Password required for user
+
+2018-03-08 08:39:14,732 - INFO - 230 Logged on
+
+2018-03-08 08:39:14,732 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 08:39:39,890 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-08 08:39:39,891 - INFO - 331 Password required for user
+
+2018-03-08 08:39:39,891 - INFO - 230 Logged on
+
+2018-03-08 08:39:39,891 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 08:41:25,394 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-08 08:41:25,394 - INFO - 331 Password required for user
+
+2018-03-08 08:41:25,394 - INFO - 230 Logged on
+
+2018-03-08 08:41:25,394 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 08:41:57,654 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-08 08:41:57,654 - INFO - 331 Password required for user
+
+2018-03-08 08:41:57,654 - INFO - 230 Logged on
+
+2018-03-08 08:41:57,655 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 08:42:48,950 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-08 08:42:48,950 - INFO - 331 Password required for user
+
+2018-03-08 08:42:48,950 - INFO - 230 Logged on
+
+2018-03-08 08:42:48,951 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-08 08:45:17,319 - INFO - Unknown host
+2018-03-08 08:45:46,750 - INFO - 220 welcome
+
+2018-03-08 08:45:46,752 - INFO - 331 Please specify password
+
+2018-03-08 08:45:46,752 - INFO - 230 Login succesful, all clear
+
+2018-03-08 08:45:46,753 - INFO - 250 Succesfully changed directory
+
+2018-03-08 08:48:18,348 - INFO - 220 welcome
+
+2018-03-08 08:48:18,348 - INFO - 331 Please specify password
+
+2018-03-08 08:48:18,348 - INFO - 230 Login succesful, all clear
+
+2018-03-08 08:48:18,349 - INFO - 250 Succesfully changed directory
+
+2018-03-08 08:49:52,135 - INFO - 220 welcome
+
+2018-03-08 08:49:52,137 - INFO - 331 Please specify password
+
+2018-03-08 08:49:52,137 - INFO - 230 Login succesful, all clear
+
+2018-03-08 08:49:52,138 - INFO - 250 Succesfully changed directory
+
+2018-03-08 08:50:28,012 - INFO - 220 welcome
+
+2018-03-08 08:50:28,013 - INFO - 331 Please specify password
+
+2018-03-08 08:50:28,013 - INFO - 230 Login succesful, all clear
+
+2018-03-08 08:50:28,013 - INFO - 250 Succesfully changed directory
+
+2018-03-08 08:56:46,344 - INFO - 220 welcome
+
+2018-03-08 08:56:46,344 - INFO - 331 Please specify password
+
+2018-03-08 08:56:46,345 - INFO - 230 Login succesful, all clear
+
+2018-03-08 08:56:46,345 - INFO - 250 Succesfully changed directory
+
+2018-03-08 08:57:11,417 - INFO - 220 welcome
+
+2018-03-08 08:57:11,418 - INFO - 331 Please specify password
+
+2018-03-08 08:57:11,420 - INFO - 230 Login succesful, all clear
+
+2018-03-08 08:57:11,420 - INFO - 250 Succesfully changed directory
+
+2018-03-08 08:57:58,686 - INFO - 220 welcome
+
+2018-03-08 08:57:58,687 - INFO - 331 Please specify password
+
+2018-03-08 08:57:58,687 - INFO - 230 Login succesful, all clear
+
+2018-03-08 08:57:58,687 - INFO - 250 Succesfully changed directory
+
+2018-03-08 09:01:49,165 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla
+2018-03-08 09:01:49,165 - INFO - -project.org/
+
+2018-03-08 09:01:49,165 - INFO - 331 Password required for user
+
+2018-03-08 09:01:49,165 - INFO - 230 Logged on
+
+2018-03-08 09:02:32,737 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla
+2018-03-08 09:02:32,737 - INFO - -project.org/
+
+2018-03-08 09:02:32,739 - INFO - 331 Password required for user
+
+2018-03-08 09:02:32,739 - INFO - 230 Logged on
+
+2018-03-08 09:03:08,200 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla
+2018-03-08 09:03:08,200 - INFO - -project.org/
+
+2018-03-08 09:03:08,200 - INFO - 331 Password required for user
+
+2018-03-08 09:03:08,200 - INFO - 230 Logged on
+
+2018-03-08 09:03:37,700 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla
+2018-03-08 09:03:37,701 - INFO - -project.org/
+
+2018-03-08 09:03:37,701 - INFO - 331 Password required for user
+
+2018-03-08 09:03:37,701 - INFO - 230 Logged on
+

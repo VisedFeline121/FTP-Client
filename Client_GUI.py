@@ -4,11 +4,11 @@ import ScrolledText
 import logging
 from ttk import Treeview
 from init_client import Client
-from os import listdir
+from os import listdir, chdir
 from os.path import isfile, join
-import _tkinter
+#import _tkinter
 
-PATH = r'C:\Users\IDO\Desktop'
+PATH = r'C:\Users\user\Desktop'
 
 
 class TextHandler(logging.Handler):
@@ -61,7 +61,7 @@ class ClientGUI(Tk.Frame):
         self.password_var = Tk.StringVar(self.master, value='pass')
         self.port_var = Tk.StringVar(self.master, value='21')
         self.command_var = Tk.StringVar(self.master, value='retr sup.txt sup.txt')
-        self.local_dir_var = 'Desktop'
+        self.local_dir_var = PATH
 
         self.master.option_add("*tearOff", 'False')
 
@@ -123,7 +123,7 @@ class ClientGUI(Tk.Frame):
         self.user_tree.heading("#0", text="Current Local Directory: {}".format(self.local_dir_var))
 
         list_of_dirs = [d for d in listdir(PATH) if not isfile(join(PATH, d))]
-        self.user_tree.insert('', 'end', PATH, text='Desktop')
+        self.user_tree.insert('', 'end', PATH, text=PATH)
         self.recursive_dirs(PATH, list_of_dirs)
         self.user_tree.tag_bind('dir', '<1>', self.change_header)
         self.user_tree.grid(row=2, columnspan=4, sticky='nswe')
@@ -143,7 +143,7 @@ class ClientGUI(Tk.Frame):
         for i in content:
             try:
                 tree.insert(parent_id, 'end', join(dir_id, i), text=i, tags=('dir'))
-            except _tkinter.TclError:
+            except Exception:
                 tree.insert(join(parent_id, dir_id), 'end', join(dir_id, i), text=i)
 
     def insert_files_to_tree(self, tree, parent_id, content):
@@ -183,9 +183,16 @@ class ClientGUI(Tk.Frame):
         for a_dir in current_dirs:
             this_dir_path = join(dir_path, a_dir)
 
-            new_dirs = [d for d in listdir(this_dir_path) if not isfile(join(this_dir_path, d))]
-            self.insert_dirs_to_tree(self.user_tree, dir_path, this_dir_path, new_dirs)
-            self.recursive_dirs(this_dir_path, new_dirs)
+            try:
+                new_dirs = [d for d in listdir(this_dir_path) if not isfile(join(this_dir_path, d))]
+                self.insert_dirs_to_tree(self.user_tree, dir_path, this_dir_path, new_dirs)
+                self.recursive_dirs(this_dir_path, new_dirs)
+            except WindowsError:
+                pass
+            except TypeError:
+                pass
+
+
 
         try:
             self.insert_files_to_tree(self.user_tree, dir_path, files_in_dir)
@@ -194,6 +201,7 @@ class ClientGUI(Tk.Frame):
 
     def change_header(self, event):
         self.local_dir_var = self.user_tree.focus()
+        chdir(self.local_dir_var)
         self.user_tree.heading('#0', text=self.local_dir_var)
 
 
