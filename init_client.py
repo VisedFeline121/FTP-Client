@@ -188,7 +188,7 @@ class Client():
 
     def QUIT(self):
         self.log_client_socket.send("QUIT" + ENDING)
-        ret =  self.log_client_socket.recv(1024)
+        ret = self.log_client_socket.recv(1024)
         self.log_client_socket.close()
         return ret
 
@@ -206,18 +206,31 @@ class Client():
 
     def RETR(self, names):
         self.PASV()
-        self.log_client_socket.send("RETR " + names[1] + ENDING)
+        self.log_client_socket.send("RETR " + names[1] + ENDING) # sends to the server which file to send
         ret = self.log_client_socket.recv(1024)
-        ans = ''
         thread.start_new_thread(self.wait_to_end, ('myThread', 1,))
-        if ret[:3] != '150':
+        if ret[:3] != '150': # checks wether file exists or not
             return ret
         else:
-            with open(names[0], 'ab') as a:
-                while not self.file_ended:
-                    ret = self.trans_client_socket.recv(1460)
-                    a.write(ret)
+            k = names[0].split('.')
+            if k[1] == 'jpg':
+                self.TYPE('I')
+                with open(names[0], 'ab') as a:
+                    while True:
+                        ret = self.trans_client_socket.recv(3000)
+                        if not ret:
+                            break
+                        a.write(ret)
+            else:
+                self.TYPE('A')
+                with open(names[0], 'wb') as a:
+                    while True:
+                        ret = self.trans_client_socket.recv(3000)
+                        if not ret:
+                            break
+                        a.write(ret)
         self.trans_client_socket.close()
+        self.log_client_socket.recv(1024)
 
     def RNFR(self, names):
         self.log_client_socket.send("RNFR " + names[0] + ENDING)
@@ -239,14 +252,20 @@ class Client():
 
     def STOR(self, names):  # put/send
         self.PASV()
-        ret = self.log_client_socket.send("STOR " + names[1] + ENDING)
-        if ret[0:3] != '150':
-            return self.log_client_socket.recv(1024)
+        k = names[0].split('.')
+        if k[1] == 'jpg':
+            self.TYPE('I')
+            self.log_client_socket.send('STOR ' + names[1] +ENDING)
+            with open(names[0], 'rb') as f:
+                for line in f:
+                    self.trans_client_socket.sendall(line)
         else:
-            with open(names[0], 'rb') as a:
-                for line in a:
-                    self.trans_client_socket.send(line)
-            return self.trans_client_socket.recv(1024)
+            self.TYPE('A')
+            self.log_client_socket.send('STOR ' + names[1] +ENDING)
+            with open(names[0], 'rb') as f:
+                for line in f:
+                    self.trans_client_socket.sendall(line)
+        self.log_client_socket.recv(1024)
 
     def STRU(self):
         self.log_client_socket.send("STRU" + ENDING)
