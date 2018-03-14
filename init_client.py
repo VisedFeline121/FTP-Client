@@ -208,7 +208,7 @@ class Client():
         self.PASV()
         self.log_client_socket.send("RETR " + names[1] + ENDING) # sends to the server which file to send
         ret = self.log_client_socket.recv(1024)
-        thread.start_new_thread(self.wait_to_end, ('myThread', 1,))
+        # thread.start_new_thread(self.wait_to_end, ('myThread', 1,))
         if ret[:3] != '150': # checks wether file exists or not
             return ret
         else:
@@ -216,16 +216,16 @@ class Client():
             if k[1] == 'jpg':
                 self.TYPE('I')
                 with open(names[0], 'ab') as a:
-                    while True:
-                        ret = self.trans_client_socket.recv(3000)
+                    while 1:
+                        ret = self.trans_client_socket.recv(1024)
                         if not ret:
                             break
                         a.write(ret)
             else:
                 self.TYPE('A')
                 with open(names[0], 'wb') as a:
-                    while True:
-                        ret = self.trans_client_socket.recv(3000)
+                    while 1:
+                        ret = self.trans_client_socket.recv(1024)
                         if not ret:
                             break
                         a.write(ret)
