@@ -2,14 +2,25 @@
 import Tkinter as Tk
 import ScrolledText
 import logging
+import sys
 from ttk import Treeview
 from init_client import Client
 from os import listdir, chdir
-from os.path import isfile, join
-#import _tkinter
+from os.path import isfile, join, dirname, abspath, exists, isdir
+import _tkinter
 
-PATH = r'C:\Heights'
+PATH = 1
+
+if len(sys.argv) == 2:
+    if exists(sys.argv[PATH]):
+        PATH = sys.argv[PATH]
+    else:
+        print "NO SUCH DIRECTORY"
+        sys.exit()
+else:
+    PATH = dirname(abspath(__file__))
 SERVERPATH = '\\'
+ENDING = '\r\n'
 
 
 class TextHandler(logging.Handler):
@@ -58,11 +69,12 @@ class ClientGUI(Tk.Frame):
         self.connect_button = None
 
         self.host_var = Tk.StringVar(self.master, value='localhost')
-        self.user_var = Tk.StringVar(self.master, value='ido')
-        self.password_var = Tk.StringVar(self.master, value='1234')
+        self.user_var = Tk.StringVar(self.master, value='user')
+        self.password_var = Tk.StringVar(self.master, value='pass')
         self.port_var = Tk.StringVar(self.master, value='21')
-        self.command_var = Tk.StringVar(self.master, value='LIST')
+        self.command_var = Tk.StringVar(self.master, value='NLST')
         self.local_dir_var = PATH
+        self.server_dir_var = SERVERPATH
 
         self.master.option_add("*tearOff", 'False')
 
@@ -124,14 +136,20 @@ class ClientGUI(Tk.Frame):
         self.user_tree.heading("#0", text="Current Local Directory: {}".format(self.local_dir_var))
 
         list_of_dirs = [d for d in listdir(PATH) if not isfile(join(PATH, d))]
-        self.user_tree.insert('', 'end', PATH, text=PATH)
-        self.recursive_dirs(self.user_tree, PATH, list_of_dirs)
-        self.user_tree.tag_bind('dir', '<1>', self.change_header)
+
+        self.user_tree.insert('', 'end', PATH, text=self.local_dir_var.split('\\')[-1])
+        self.recursive_dirs(PATH)
+
+        self.user_tree.tag_bind('dir', '<1>', self.change_user_header)
         self.user_tree.grid(row=2, columnspan=4, sticky='nswe')
 
     def create_server_tree(self):
         self.server_tree = Treeview(self.master)
         self.server_tree.heading("#0", text="Current Server Directory: {}".format(''))
+
+        self.server_tree.insert('', 'end', SERVERPATH, text=self.server_dir_var)
+
+        self.server_tree.tag_bind('server_dir', '<1>', self.change_server_header)
         self.server_tree.grid(row=2, column=4, columnspan=5, sticky='nswe')
 
     def create_arbitrary_command(self):
@@ -140,14 +158,16 @@ class ClientGUI(Tk.Frame):
         self.command_entry = Tk.Entry(self.master, textvariable=self.command_var).grid(row=3, column=1)
         self.command_button = Tk.Button(self.master, text="Send Command", command=self.add_to_log).grid(row=3, column=2)
 
-    def insert_dirs_to_tree(self, tree, parent_id, dir_id, content):
+    @staticmethod
+    def insert_dirs_to_tree(tree, parent_id, dir_id, content):
         for i in content:
             try:
-                tree.insert(parent_id, 'end', join(dir_id, i), text=i, tags=('dir'))
-            except Exception:
+                tree.insert(parent_id, 'end', join(dir_id, i), text=i, tags='dir')
+            except _tkinter.TclError:
                 tree.insert(join(parent_id, dir_id), 'end', join(dir_id, i), text=i)
 
-    def insert_files_to_tree(self, tree, parent_id, content):
+    @staticmethod
+    def insert_files_to_tree(tree, parent_id, content):
         for i in content:
             tree.insert(parent_id, 'end', text=i)
 
@@ -159,8 +179,9 @@ class ClientGUI(Tk.Frame):
         #logging.info(self.client.OPTS(['UTF8', 'ON']))
         logging.info(self.client.USER([self.user_var.get()]))
         logging.info(self.client.PASS([self.password_var.get()]))
-        logging.info(self.client.CWD(['/']))
-        self.add_server_info()
+        logging.info(self.client.CWD(list(SERVERPATH)))
+
+        self.insert_to_server_tree(SERVERPATH)
 
     def add_to_log(self):
         logging.info(self.send_command())
@@ -180,36 +201,60 @@ class ClientGUI(Tk.Frame):
     def run(self):
         self.master.mainloop()
 
-    def recursive_dirs(self, tree, dir_path, current_dirs):
+    def recursive_dirs(self, dir_path):
         files_in_dir = [f for f in listdir(dir_path) if isfile(join(dir_path, f))]
-        for a_dir in current_dirs:
-            this_dir_path = join(dir_path, a_dir)
-
-            try:
-                new_dirs = [d for d in listdir(this_dir_path) if not isfile(join(this_dir_path, d))]
-                self.insert_dirs_to_tree(tree, dir_path, this_dir_path, new_dirs)
-                self.recursive_dirs(this_dir_path, new_dirs)
-            except WindowsError:
-                pass
-            except TypeError:
-                pass
+        current_dirs = [d for d in listdir(dir_path) if isdir(join(dir_path, d))]
+        for i in current_dirs:
+            self.user_tree.insert(dir_path, 'end', join(dir_path, i), text=i, tags='server_dir')
+            self.recursive_dirs(join(dir_path, i))
 
         try:
             self.insert_files_to_tree(self.user_tree, dir_path, files_in_dir)
         except:
             pass
 
-    def change_header(self, event):
+    def insert_to_server_tree(self, dir_path):
+        self.client.CWD([dir_path])
+        content = self.client.NLST().split('\r\n')
+
+        while '' in content:
+            content.remove('')
+
+        dirs_in_dir = []
+        files_in_dir = []
+
+        for i in content:
+            if '.' not in i:
+                dirs_in_dir.append(i)
+            else:
+                files_in_dir.append(i)
+
+        temp = dir_path.split('\\')
+
+        for i in dirs_in_dir:
+            if i == temp[-1]:
+                break
+            try:
+                self.server_tree.insert(dir_path, 'end', join(dir_path, i), text=i, tags='server_dir')
+                self.insert_to_server_tree(join(dir_path, i))
+            except _tkinter.TclError:
+                pass
+
+        for i in files_in_dir:
+            self.server_tree.insert(dir_path, 'end', text=i)
+
+        self.client.CWD([dir_path])
+
+    def change_user_header(self, event):
         self.local_dir_var = self.user_tree.focus()
         chdir(self.local_dir_var)
-        self.user_tree.heading('#0', text=self.local_dir_var)
+        self.user_tree.heading('#0', text="Current Local Directory: {}".format(self.local_dir_var))
 
-    def add_server_info(self):
-        dir_content = self.client.NLST()
-        dirs_in_dir = [d for d in dir_content if not '.' in d]
+    def change_server_header(self, event):
+        self.server_dir_var = self.server_tree.focus()
+        logging.info(self.client.CWD([self.server_dir_var]))
+        self.server_tree.heading('#0', text="Current Local Directory: {}".format(self.server_dir_var))
 
-        self.server_tree.insert('', 'end', SERVERPATH, text=SERVERPATH)
-        self.recursive_dirs(self.server_tree, SERVERPATH, dirs_in_dir)
 
 def main():
     master = Tk.Tk()

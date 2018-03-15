@@ -34,10 +34,10 @@ class Client():
                              'CWD': self.CWD, 'DELE': self.DELE, 'FEAT': self.FEAT, 'HELP': self.HELP,
                              'LIST': self.LIST, 'MODE': self.MODE, 'NLST': self.NLST, 'NOOP': self.NOOP,
                              'OPTS': self.OPTS, 'PASS': self.PASS, 'PASV': self.PASV, 'PORT': self.PORT,
-                             'QUIT': self.QUIT, 'REIN': self.REIN, 'REST': self.REST, 'RESTP': self.RESTP,
-                             'RETR': self.RETR, 'RNFR': self.RNFR, 'RNTO': self.RNTO, 'SITE': self.SITE,
-                             'STAT': self.STAT, 'STOR': self.STOR, 'STRU': self.STRU, 'TYPE': self.TYPE,
-                             'USER': self.USER
+                             'PWD': self.PWD, 'QUIT': self.QUIT, 'REIN': self.REIN, 'REST': self.REST,
+                             'RESTP': self.RESTP, 'RETR': self.RETR, 'RNFR': self.RNFR, 'RNTO': self.RNTO,
+                             'SITE': self.SITE, 'STAT': self.STAT, 'STOR': self.STOR, 'STRU': self.STRU,
+                             'SYST': self.SYST, 'TYPE': self.TYPE, 'USER': self.USER
         }
         self.status = False
         self.file_ended = False
@@ -169,7 +169,6 @@ class Client():
         self.trans_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.log_client_socket.send("PASV" + ENDING)
         response = self.log_client_socket.recv(1024)
-        print response
         response = response.split('(')[1][:-3]
         ip = '.'.join(response.split(',')[0:4])
         port = response.split(',')[4:]
@@ -186,10 +185,15 @@ class Client():
         self.trans_client_socket.connect((self.ip, port[0]))
         return self.log_client_socket.recv(1024)
 
+    def PWD(self):
+        self.log_client_socket.send('PWD' + ENDING)
+        return self.log_client_socket.recv(1024)
+
     def QUIT(self):
         self.log_client_socket.send("QUIT" + ENDING)
-        ret = self.log_client_socket.recv(1024)
+        ret =  self.log_client_socket.recv(1024)
         self.log_client_socket.close()
+        self.log_client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         return ret
 
     def REIN(self):
@@ -269,6 +273,10 @@ class Client():
 
     def STRU(self):
         self.log_client_socket.send("STRU" + ENDING)
+        return self.log_client_socket.recv(1024)
+
+    def SYST(self):
+        self.log_client_socket.send("SYST" + ENDING)
         return self.log_client_socket.recv(1024)
 
     def TYPE(self, type):

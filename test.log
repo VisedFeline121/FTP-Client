@@ -182,3 +182,57 @@
 
 2018-03-08 09:03:37,701 - INFO - 230 Logged on
 
+2018-03-15 08:27:39,359 - INFO - 220 welcome
+
+2018-03-15 08:27:39,361 - INFO - 331 Please specify password
+
+2018-03-15 08:27:39,361 - INFO - 230 Login succesful, all clear
+
+2018-03-15 08:27:39,362 - INFO - 250 Succesfully changed directory
+
+2018-03-15 08:29:34,367 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-15 08:29:34,368 - INFO - 331 Password required for user
+
+2018-03-15 08:29:34,368 - INFO - 230 Logged on
+
+2018-03-15 08:29:34,368 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-15 08:29:36,765 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-15 08:29:38,740 - INFO - 250 CWD successful. "/programms" is current directory.
+
+2018-03-15 08:29:43,487 - INFO - 550 CWD failed. "/programms/I001": directory not found.
+
+2018-03-15 08:29:43,694 - INFO - 250 CWD successful. "/programms" is current directory.
+
+2018-03-15 08:29:49,992 - INFO - 250 CWD successful. "/" is current directory.
+
+2018-03-15 08:29:58,335 - INFO - desktop.ini
+Google Chrome.lnk
+Internet Explorer.lnk
+programms
+_diag
+
+2018-03-15 08:30:01,851 - INFO - 550 CWD failed. "/I00F": directory not found.
+
+2018-03-15 08:30:03,220 - INFO - 550 CWD failed. "/I001": directory not found.
+
+2018-03-15 08:30:03,444 - INFO - 250 CWD successful. "/programms" is current directory.
+
+2018-03-15 08:30:04,430 - INFO - 250 CWD successful. "/programms" is current directory.
+
+2018-03-15 08:30:04,654 - INFO - 250 CWD successful. "/programms" is current directory.
+
+2018-03-15 08:34:23,631 - INFO - 220-FileZilla Server 0.9.60 beta
+220-written by Tim Kosse (tim.kosse@filezilla-project.org)
+220 Please visit https://filezilla-project.org/
+
+2018-03-15 08:34:23,631 - INFO - 331 Password required for user
+
+2018-03-15 08:34:23,632 - INFO - 230 Logged on
+
+2018-03-15 08:34:23,632 - INFO - 250 CWD successful. "/" is current directory.
+
